@@ -1,0 +1,86 @@
+/* ARDUINO IDE
+Description
+This built off of the first lesson (MotorSpeedDirection). In this lesson I learned how to control speed and direction
+Based off varying imputs from a joystick, specifically the y-value from the joystick. Watched Pual McWhorter 
+tutorial for learning this and implementing this. 
+
+Materials
+ELEGOO UNO R3, Power supply module, Fan blade and 3-6V motor, breadboard, 
+9V battery, L293D, 8 jumper wires, joystick, 3 Female->Male Connector wires
+
+
+//Calculations
+*Read joystick equilibrium value from serial port and used that number (512)
+
+if jVal < 512:
+set direction: dir 1 HIGH, dir 2 LOW
+Speed:
+m = (y2 - y1) / (x2 - x1) = (255 - 0) / (0 - 512)
+= -255 / 512
+y - 255 = (-255 / 512) * (x - 0)
+=> y = -255 / 512 * x + 255
+
+if jVal >= 512
+set direction: dir 1 = LOW, dir 2 = HIGH
+Speed:
+m = (y2 - y1) / (x2 - x1) = (0 - 255) / (512 - 1023)
+= 255 / 512
+y - 0 = (255 / 512) * (x - 512)
+y = 255 / 512 * x - 255
+*GEMINI Translated from IPAD calculation screenshot*
+
+
+WIRING
+*Power supply goes on breadboard, ensure +/- line up with breadboard +/-
+UNO GND -> Breadboard shared GND
+UNO GND -> Joystick GND
+UNO 5V -> Joystick +5V
+UNO DIG 5 -> PIN 1 L293D
+UNO DIG 4 -> PIN 2 L293D 
+UNO DIG 3 -> PIN 7 L293D
+UNO A1 -> Joystick VRy
+L293D PIN 4 -> Breadboard shared GND
+L293D PIN 6 -> Black wire motor
+L293D PIN 8 -> Breadboard (+)
+*/
+
+
+//CODE
+int speedPin = 5;
+int dir1 = 4;
+int dir2 = 3;
+int mSpeed;
+int jPin = A1;
+int jVal;
+
+void setup() {
+pinMode(speedPin, OUTPUT);
+pinMode(dir1, OUTPUT);
+pinMode(dir2, OUTPUT);
+pinMode(jPin, INPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+jVal = analogRead(jPin);
+
+Serial.println(jVal); 
+
+if(jVal < 512) {
+  digitalWrite(dir1, LOW);
+  digitalWrite(dir2, HIGH);
+  mSpeed = -255./512*jVal+255.;
+  analogWrite(speedPin, mSpeed);
+}
+
+if(jVal >= 512) {
+  digitalWrite(dir1, HIGH);
+  digitalWrite(dir2, LOW);
+  mSpeed = (255./512.)*jVal-255.;
+}
+
+digitalWrite(dir1, LOW);
+digitalWrite(dir2, HIGH);
+analogWrite(speedPin, mSpeed);
+
+}
