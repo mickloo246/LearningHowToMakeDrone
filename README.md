@@ -19,11 +19,11 @@ Built on the first sketch by adding a joystick as an analog input to control mot
 No AI was used in creation of code for the ELEGOO*
 
 Hardware used
-	•	ELEGOO UNO R3 (Arduino-compatible board)
-	•	L293D dual H-bridge motor driver
-	•	3–6V DC motor with fan blade
-	•	Analog joystick module
-	•	Breadboard, 9V battery, power supply module, jumper wires
+	-	ELEGOO UNO R3 (Arduino-compatible board)
+	-	L293D dual H-bridge motor driver
+	-	3–6V DC motor with fan blade
+	-	Analog joystick module
+	-	Breadboard, 9V battery, power supply module, jumper wires
 
 What I have learned so far
 My goal is to build a drone that can carry a dji camera so my dad can capture aerial pictures of stages and events that he runs. Here are
