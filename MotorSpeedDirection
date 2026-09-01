@@ -1,0 +1,44 @@
+/* ARDUINO IDE
+Description
+Most basic part of building a drone is to learn how to control the speed and direction of a motor. 
+This is done by using a motor driver, in this case, the L293D. The L293D is a dual H-Bridge motor 
+driver that allows you to control the speed and direction of two DC motors. In this example, I  
+learned how to set speed and direction ofone motor.
+
+Materials 
+ELEGOO UNO R3, Power supply module, Fan blade and 3-6V motor, breadboard, 
+9V battery, L293D, 8 jumper wires
+
+WIRING
+*Power supply goes on breadboard, ensure +/- line up with breadboard +/-
+UNO GND -> Breadboard shared GND
+UNO DIG 5 -> PIN 1 L293D
+UNO DIG 4 -> PIN 2 L293D 
+UNO DIG 3 -> PIN 7 L293D
+L293D PIN 3 -> Red wire Motor
+L293D PIN 4 -> Breadboard shared GND
+L293D PIN 6 -> Black wire motor
+L293D PIN 8 -> Breadboard (+)
+
+*/
+
+//CODE
+int speedPin = 5;
+int dir1 = 4;
+int dir2 = 3;
+int mSpeed = 255;
+
+
+void setup() {
+pinMode(speedPin, OUTPUT);
+pinMode(dir1, OUTPUT);
+pinMode(dir2, OUTPUT);
+Serial.begin(9600);
+}
+
+void loop() {
+digitalWrite(dir1, LOW);
+digitalWrite(dir2, HIGH);
+analogWrite(speedPin, 255);
+
+}
